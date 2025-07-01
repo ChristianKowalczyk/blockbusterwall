@@ -37,7 +37,7 @@ function App() {
               {movies.map((movie, idx) => (
                 <motion.button
                   key={movie.title}
-                  className="shadow-lg rounded-lg overflow-hidden border-4 border-black bg-white cursor-pointer"
+                  className="shadow-lg rounded-lg overflow-hidden border-4 border-black bg-white cursor-pointer w-16 h-24"
                   initial={{ opacity: 0, y: 50, scale: 0.8 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   whileHover={{ 
@@ -54,7 +54,11 @@ function App() {
                   }}
                   onClick={() => setSelectedMovie(movie)}
                 >
-                  <img src={movie.image} alt={movie.title} className="w-16 h-26 object-cover" />
+                  <img
+                    src={movie.image}
+                    alt={movie.title}
+                    className="w-full h-full object-cover block"
+                  />
                 </motion.button>
               ))}
             </div>
