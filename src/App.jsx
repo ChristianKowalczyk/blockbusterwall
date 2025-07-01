@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import BlockbusterLogo from "./BlockbusterLogo";
-import CarriePoster from '../Carrieposter.jpg';
-import SuspiriaPoster from '../SuspiriaItaly.jpg';
+import CarriePoster from '/pics/carrie.jpg';
+import SuspiriaPoster from '/pics/suspiria.jpg';
 
 const movies = [
   {
@@ -32,21 +32,25 @@ function App() {
         </div>
         {/* Black rectangle for movie tiles */}
         <div className="w-full flex justify-center mt-auto">
-          <div className="bg-gray-800 px-4 py-6 w-3/4" style={{borderRadius: 0, marginBottom: 0, minHeight: '450px'}}>
+          <div className="bg-gray-600 px-4 py-6 w-3/4" style={{borderRadius: 0, marginBottom: 0, minHeight: '450px'}}>
             <div className="flex flex-wrap gap-4 justify-center">
               {movies.map((movie, idx) => (
                 <motion.button
                   key={movie.title}
                   className="shadow-lg rounded-lg overflow-hidden border-4 border-black bg-white cursor-pointer w-16 h-24"
-                  initial={{ opacity: 0, y: 50, scale: 0.8 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  whileHover={{ 
-                    scale: 1.1,
-                    rotate: 5,
-                    boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.3)"
+                  initial={{ opacity: 0, y: 50, scale: 0.8, rotate: 0 }}
+                  animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
+                  whileHover={{
+                    rotate: [0, -5, 5, -5, 0],
+                    transition: {
+                      duration: 1.2,
+                      repeat: Infinity,
+                      repeatType: 'loop',
+                      ease: 'easeInOut',
+                    },
                   }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ 
+                  whileTap={{ scale: 0.97 }}
+                  transition={{
                     duration: 0.3,
                     delay: idx * 0.1,
                     type: 'spring',
@@ -62,11 +66,12 @@ function App() {
                 </motion.button>
               ))}
             </div>
+            <hr className="border-t-2 border-gray-400 w-full" />
           </div>
         </div>
         {/* Grey horizontal rectangle at the very bottom, absolutely positioned */}
         <div className="absolute left-0 bottom-0 w-full">
-          <div className="bg-gray-400 w-full" style={{height: '48px', borderRadius: 0, marginTop: 0}}></div>
+          <div className="w-full diamond-pattern" style={{height: '32px', borderRadius: 0, marginTop: 0}}></div>
         </div>
         {/* Movie info modal */}
         {selectedMovie && (

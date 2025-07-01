@@ -24,7 +24,7 @@ body, html {
 .logo-bg-container {
   min-height: 100dvh; /* Use dynamic viewport units for mobile compatibility */
   width: 100%;
-  background: #882c74;
+  background: #6d245d;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,4 +70,42 @@ body, html {
   border-radius: 6px;
   padding: 0.1em 1.2em 0.1em 1.2em;
   /* No shadow, no italics */
+}
+
+.diamond-pattern {
+  background-color: #3f71ae; /* fallback for gray-400 */
+  background-image: repeating-linear-gradient(135deg, #2d7232 0 8px, transparent 8px 24px), repeating-linear-gradient(-135deg, #2d7232 0 8px, transparent 8px 24px);
+  background-size: 32px 32px;
+}
+
+.blockbuster-flicker {
+  display: inline-block;
+  animation: flicker-glow 1.2s infinite alternate;
+}
+
+@keyframes flicker-glow {
+  0% {
+    filter: drop-shadow(0 0 8px #ffe066) drop-shadow(0 0 2px #fff6b0);
+    opacity: 1;
+  }
+  20% {
+    filter: drop-shadow(0 0 10px #ffe066) drop-shadow(0 0 4px #fff6b0);
+    opacity: 0.95;
+  }
+  40% {
+    filter: drop-shadow(0 0 6px #ffe066) drop-shadow(0 0 1px #fff6b0);
+    opacity: 0.98;
+  }
+  60% {
+    filter: drop-shadow(0 0 12px #ffe066) drop-shadow(0 0 6px #fff6b0);
+    opacity: 1;
+  }
+  80% {
+    filter: drop-shadow(0 0 7px #ffe066) drop-shadow(0 0 2px #fff6b0);
+    opacity: 0.97;
+  }
+  100% {
+    filter: drop-shadow(0 0 8px #ffe066) drop-shadow(0 0 2px #fff6b0);
+    opacity: 1;
+  }
 }

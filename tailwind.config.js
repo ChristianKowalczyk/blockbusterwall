@@ -7,8 +7,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        'blockbuster-yellow': '#e9c246',
+        'blockbuster-yellow': '#dbb039',
       },
+      
     },
   },
   plugins: [],
