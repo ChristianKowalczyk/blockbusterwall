@@ -1,21 +1,8 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
-import BlockbusterLogo from "./BlockbusterLogo";
-import CarriePoster from '/pics/carrie.jpg';
-import SuspiriaPoster from '/pics/suspiria.jpg';
-
-const movies = [
-  {
-    title: 'Carrie',
-    image: CarriePoster,
-    description: 'Carrie movie desc.'
-  },
-  {
-    title: 'Suspiria',
-    image: SuspiriaPoster,
-    description: 'Dancers scary.'
-  },
-];
+import BlockbusterLogo from "./components/BlockbusterLogo";
+import MovieGrid from "./components/MovieGrid";
+import MovieModal from "./components/MovieModal";
+import movies from "./data/movies";
 
 function App() {
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -33,39 +20,7 @@ function App() {
         {/* Black rectangle for movie tiles */}
         <div className="w-full flex justify-center mt-auto">
           <div className="bg-gray-600 px-4 py-6 w-3/4" style={{borderRadius: 0, marginBottom: 0, minHeight: '450px'}}>
-            <div className="flex flex-wrap gap-4 justify-center">
-              {movies.map((movie, idx) => (
-                <motion.button
-                  key={movie.title}
-                  className="shadow-lg rounded-lg overflow-hidden border-4 border-black bg-white cursor-pointer w-16 h-24"
-                  initial={{ opacity: 0, y: 50, scale: 0.8, rotate: 0 }}
-                  animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
-                  whileHover={{
-                    rotate: [0, -5, 5, -5, 0],
-                    transition: {
-                      duration: 1.2,
-                      repeat: Infinity,
-                      repeatType: 'loop',
-                      ease: 'easeInOut',
-                    },
-                  }}
-                  whileTap={{ scale: 0.97 }}
-                  transition={{
-                    duration: 0.3,
-                    delay: idx * 0.1,
-                    type: 'spring',
-                    stiffness: 300
-                  }}
-                  onClick={() => setSelectedMovie(movie)}
-                >
-                  <img
-                    src={movie.image}
-                    alt={movie.title}
-                    className="w-full h-full object-cover block"
-                  />
-                </motion.button>
-              ))}
-            </div>
+            <MovieGrid movies={movies} onSelect={setSelectedMovie} />
             <hr className="border-t-2 border-gray-400 w-full" />
           </div>
         </div>
@@ -73,16 +28,8 @@ function App() {
         <div className="absolute left-0 bottom-0 w-full">
           <div className="w-full diamond-pattern" style={{height: '32px', borderRadius: 0, marginTop: 0}}></div>
         </div>
-        {/* Movie info modal */}
         {selectedMovie && (
-          <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50" onClick={() => setSelectedMovie(null)}>
-            <div className="bg-white p-6 rounded-lg shadow-xl max-w-xs relative" onClick={e => e.stopPropagation()}>
-              <button className="absolute top-2 right-2 text-black text-xl font-bold" onClick={() => setSelectedMovie(null)}>&times;</button>
-              <h2 className="text-2xl font-bold mb-2">{selectedMovie.title}</h2>
-              <img src={selectedMovie.image} alt={selectedMovie.title} className="w-32 h-48 object-cover mb-4 mx-auto" />
-              <p className="mb-4">{selectedMovie.description}</p>
-            </div>
-          </div>
+          <MovieModal movie={selectedMovie} onClose={() => setSelectedMovie(null)} />
         )}
       </div>
     </div>
