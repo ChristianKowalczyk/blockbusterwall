@@ -85,27 +85,163 @@ body, html {
 
 @keyframes flicker-glow {
   0% {
-    filter: drop-shadow(0 0 8px #ffe066) drop-shadow(0 0 2px #fff6b0);
+    filter: drop-shadow(0 0 4px #ffe066) drop-shadow(0 0 2px #fff6b0);
     opacity: 1;
   }
   20% {
-    filter: drop-shadow(0 0 10px #ffe066) drop-shadow(0 0 4px #fff6b0);
+    filter: drop-shadow(0 0 5px #ffe066) drop-shadow(0 0 4px #fff6b0);
     opacity: 0.95;
   }
   40% {
-    filter: drop-shadow(0 0 6px #ffe066) drop-shadow(0 0 1px #fff6b0);
+    filter: drop-shadow(0 0 3px #ffe066) drop-shadow(0 0 1px #fff6b0);
     opacity: 0.98;
   }
   60% {
-    filter: drop-shadow(0 0 12px #ffe066) drop-shadow(0 0 6px #fff6b0);
+    filter: drop-shadow(0 0 6px #ffe066) drop-shadow(0 0 6px #fff6b0);
     opacity: 1;
   }
   80% {
-    filter: drop-shadow(0 0 7px #ffe066) drop-shadow(0 0 2px #fff6b0);
+    filter: drop-shadow(0 0 3px #ffe066) drop-shadow(0 0 2px #fff6b0);
     opacity: 0.97;
   }
   100% {
-    filter: drop-shadow(0 0 8px #ffe066) drop-shadow(0 0 2px #fff6b0);
+    filter: drop-shadow(0 0 4px #ffe066) drop-shadow(0 0 2px #fff6b0);
     opacity: 1;
   }
+}
+
+.neon-carpet {
+  background: #1f1f1f;
+  position: relative;
+  width: 100%;
+  height: 32px;
+  overflow: hidden;
+}
+.neon-dot {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  z-index: 2;
+}
+.neon-dot-pink {
+  background: #ff4fd8;
+  color: #ff4fd8;
+}
+.neon-dot-green {
+  background: #00ffb7;
+  color: #00ffb7;
+}
+.neon-dot-blue {
+  background: #4fd8ff;
+  color: #4fd8ff;
+}
+
+/* Zigzag using SVG background for crispness */
+.neon-zigzag {
+  position: absolute;
+  width: 36px;
+  height: 10px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 2;
+}
+.neon-zigzag-pink {
+  background-image: url('data:image/svg+xml;utf8,<svg width="36" height="12" xmlns="http://www.w3.org/2000/svg"><polyline points="0,12 6,0 12,12 18,0 24,12 30,0 36,12" stroke="%23ff4fd8" stroke-width="3" fill="none"/></svg>');
+}
+.neon-zigzag-green {
+  background-image: url('data:image/svg+xml;utf8,<svg width="36" height="12" xmlns="http://www.w3.org/2000/svg"><polyline points="0,12 6,0 12,12 18,0 24,12 30,0 36,12" stroke="%2300ffb7" stroke-width="3" fill="none"/></svg>');
+}
+.neon-zigzag-blue {
+  background-image: url('data:image/svg+xml;utf8,<svg width="36" height="12" xmlns="http://www.w3.org/2000/svg"><polyline points="0,12 6,0 12,12 18,0 24,12 30,0 36,12" stroke="%234fd8ff" stroke-width="3" fill="none"/></svg>');
+}
+
+.neon-swirl {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 3px solid;
+  border-radius: 50%;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  transform: rotate(-20deg);
+  z-index: 2;
+}
+.neon-swirl-pink {
+  border-color: #ff4fd8;
+  color: #ff4fd8;
+}
+.neon-swirl-green {
+  border-color: #00ffb7;
+  color: #00ffb7;
+}
+.neon-swirl-blue {
+  border-color: #4fd8ff;
+  color: #4fd8ff;
+}
+
+.rug-warp {
+  transform: scaleY(0.55);
+}
+
+.shelf-shadow {
+  box-shadow: 0 6px 20px 0 rgba(0,0,0,0.32), 0 2px 6px 0 rgba(0,0,0,0.20);
+}
+
+.carpet-shadow {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.02) 80%, transparent 100%);
+  height: 0px !important;
+  top: -6px !important;
+  border-radius: 0 0 8px 8px;
+  opacity: 0.7;
+}
+
+.ui-haze-grain {
+  pointer-events: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.32;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.16) 0 2px, transparent 2px 4px),
+    url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="6" cy="6" r="1" fill="white" fill-opacity="0.12"/><circle cx="30" cy="12" r="1.5" fill="white" fill-opacity="0.10"/><circle cx="54" cy="18" r="1" fill="white" fill-opacity="0.10"/><circle cx="18" cy="30" r="1.2" fill="white" fill-opacity="0.10"/><circle cx="42" cy="36" r="1.1" fill="white" fill-opacity="0.10"/><circle cx="12" cy="54" r="1.3" fill="white" fill-opacity="0.10"/><circle cx="36" cy="48" r="1.1" fill="white" fill-opacity="0.10"/></svg>');
+  background-size: auto, 60px 60px;
+  mix-blend-mode: lighten;
+}
+
+.movie-shelf {
+  border-radius: 0;
+  margin-bottom: 0;
+  min-height: 500px;
+  position: relative;
+}
+
+.wall-container {
+  min-width: 360px;
+  min-height: 640px;
+}
+
+.logo-margin {
+  margin-left: 1rem;
+  margin-top: 2rem;
+}
+
+.carpet-shadow-pos {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.neon-carpet-layout {
+  height: 32px;
+  border-radius: 0;
+  margin-top: 0;
+  position: relative;
 }

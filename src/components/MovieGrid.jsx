@@ -1,11 +1,10 @@
-import { useMemo } from 'react';
 import MovieTile from './MovieTile';
 
-export default function MovieGrid({ movies, onSelect }) {
-  const numRows = Math.ceil(movies.length / 3);
+export default function MovieGrid({ movies }) {
+  const numRows = Math.ceil(movies.length / 2);
   function getRandomizedRow(rowTiles) {
-    const slots = [null, null, null];
-    const indices = [0, 1, 2];
+    const slots = [null, null];
+    const indices = [0, 1];
     for (let i = 0; i < rowTiles.length; i++) {
       const slotIdx = indices.splice(Math.floor(Math.random() * indices.length), 1)[0];
       slots[slotIdx] = rowTiles[i];
@@ -13,27 +12,22 @@ export default function MovieGrid({ movies, onSelect }) {
     return slots;
   }
 
-  // Memoize the randomized rows so they only randomize on mount
-  const randomizedRows = useMemo(() => {
-    return Array.from({ length: numRows }).map((_, rowIdx) => {
-      const rowTiles = movies.slice(rowIdx * 3, rowIdx * 3 + 3);
-      return getRandomizedRow(rowTiles);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const randomizedRows = Array.from({ length: numRows }).map((_, rowIdx) => {
+    const rowTiles = movies.slice(rowIdx * 2, rowIdx * 2 + 2);
+    return getRandomizedRow(rowTiles);
+  });
 
   return (
-    <div className="flex flex-wrap gap-4 justify-center">
+    <div className="flex flex-wrap gap-4 justify-center pt-8">
       {randomizedRows.map((randomizedRow, rowIdx) => (
         <div key={rowIdx} className="w-full">
-          <div className="grid grid-cols-3 w-full items-end">
+          <div className="grid grid-cols-2 w-full items-end">
             {randomizedRow.map((movie, idx) => (
               movie ? (
                 <MovieTile
                   key={movie.title + idx + rowIdx}
                   movie={movie}
-                  onClick={() => onSelect(movie)}
-                  animationDelay={(rowIdx * 3 + idx) * 0.1}
+                  animationDelay={(rowIdx * 2 + idx) * 0.1}
                 />
               ) : (
                 <div key={"empty-" + idx + rowIdx}></div>
