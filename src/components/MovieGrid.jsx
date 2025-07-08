@@ -1,6 +1,7 @@
 import MovieTile from './MovieTile';
+import { useMemo } from 'react';
 
-export default function MovieGrid({ movies }) {
+export default function MovieGrid({ movies, onTileImageLoad, onTileAnimationComplete }) {
   const numRows = Math.ceil(movies.length / 2);
   function getRandomizedRow(rowTiles) {
     const slots = [null, null];
@@ -12,10 +13,12 @@ export default function MovieGrid({ movies }) {
     return slots;
   }
 
-  const randomizedRows = Array.from({ length: numRows }).map((_, rowIdx) => {
-    const rowTiles = movies.slice(rowIdx * 2, rowIdx * 2 + 2);
-    return getRandomizedRow(rowTiles);
-  });
+  const randomizedRows = useMemo(() => (
+    Array.from({ length: numRows }).map((_, rowIdx) => {
+      const rowTiles = movies.slice(rowIdx * 2, rowIdx * 2 + 2);
+      return getRandomizedRow(rowTiles);
+    })
+  ), [movies]);
 
   return (
     <div className="flex flex-wrap gap-4 justify-center pt-8">
@@ -28,6 +31,8 @@ export default function MovieGrid({ movies }) {
                   key={movie.title + idx + rowIdx}
                   movie={movie}
                   animationDelay={(rowIdx * 2 + idx) * 0.1}
+                  onImageLoad={() => onTileImageLoad(rowIdx * 2 + idx)}
+                  onAnimationComplete={() => onTileAnimationComplete(rowIdx * 2 + idx)}
                 />
               ) : (
                 <div key={"empty-" + idx + rowIdx}></div>
